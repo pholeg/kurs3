@@ -1,8 +1,11 @@
 import json
+import zipfile
 from datetime import datetime
 
 
-def load_transactions(file_name='operations.json'):
+def load_transactions(zip_file='operations.zip', file_name='operations.json'):
+    with zipfile.ZipFile(zip_file,'r') as un_zip:
+        un_zip.extractall()
     with (open(file_name, 'r', encoding="utf-8") as fl):
         return json.loads(fl.read())
 
@@ -15,7 +18,9 @@ def executed_transactions(transactions=load_transactions()):
     return return_dict
 
 
-def last_five_transactions(transactions=executed_transactions()):
+def last_five_transactions(transactions=None):
+    if transactions is None:
+        transactions = executed_transactions()
     return_dict = {}
     sorted_transactions = sorted(transactions,reverse=True)
     for last_five in sorted_transactions:
@@ -36,8 +41,6 @@ def formate_date(non_formate_date):
     return form_date.strftime("%d.%m.%Y")
 
 
-#     mysps.append(b)
-# print(sorted(mysps,reverse=True))
 
 # class Transactions:
 #     def __init__(self, id_trans, date_trans, description_trans, from_trans, to_trans, amount_trans, currency_trans):
@@ -53,7 +56,7 @@ def formate_date(non_formate_date):
 #         return (f"Transactions ('{self.date_trans}', '{self.description_trans}', '{self.from_trans}', '{self.to_trans}', '{self.amount_trans}', '{self.currency_trans}')")
 #
 #     def append(self, date_trans, description_trans, from_trans, to_trans, amount_trans, currency_trans):
-#         self.append(Transactions(date_trans, description_trans, from_trans, to_trans, amount_trans, currency_trans)
+#          self.append(Transactions(date_trans, description_trans, from_trans, to_trans, amount_trans, currency_trans)
 #
 
 # for fl_ln in load_transactions():
