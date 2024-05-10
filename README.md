@@ -4,6 +4,6 @@
 
 Развернуть среду из pyproject.toml
 
-Наличие стандартных библиотек: "json", "zipfile", "datetime"
+Наличие стандартных библиотек: "json", "zipfile", "datetime", "pathlib"
 
 По условию задачи в корневой папке обязательно лежит operations.zip
