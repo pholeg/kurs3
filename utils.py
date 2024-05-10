@@ -32,13 +32,10 @@ def un_visible_number(un_number):
 
 
 def formate_date(non_formate_date):
-    return datetime.strptime(non_formate_date[0:len(non_formate_date)-7], "%Y-%m-%dT%H:%M:%S")
+    form_date = datetime.strptime(non_formate_date[0:len(non_formate_date)-7], "%Y-%m-%dT%H:%M:%S")
+    return form_date.strftime("%d.%m.%Y")
 
 
-
-
-# mysps = []
-# for a, b in last_executed_transactions().items():
 #     mysps.append(b)
 # print(sorted(mysps,reverse=True))
 
