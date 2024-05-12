@@ -3,12 +3,10 @@ import zipfile
 from datetime import datetime
 from pathlib import Path
 
-import self
 
-
-def load_transactions(zip_file='../src/operations.zip'):
+def load_transactions(zip_file='operations.zip'):
     """Распаковывает zip в текущую папку. Открывает JSON файл, читает в кодировке utf-8, возвращает dict"""
-    path_kurs3_zip = Path('../src/operations.json')
+    path_kurs3_zip = Path('operations.json')
     if not path_kurs3_zip.exists():
         with zipfile.ZipFile(zip_file,'r') as un_zip:
             un_zip.extractall()
@@ -42,7 +40,7 @@ def un_visible_number(un_number):
     if un_number[0:4] == "Счет":
         return f"{un_number[0:4]} **{un_number[len(un_number) - 4:len(un_number)]}"
     else:
-        return f"{un_number[0:len(un_number)-12]} {un_number[len(un_number)-12:len(un_number)-10]} ** **** {un_number[len(un_number)-4:len(un_number)]}"
+        return f"{un_number[0:len(un_number)-12]} {un_number[len(un_number)-12:len(un_number)-10]}** **** {un_number[len(un_number)-4:len(un_number)]}"
 
 
 def formate_date(non_formate_date):
