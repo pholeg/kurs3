@@ -3,6 +3,8 @@ import zipfile
 from datetime import datetime
 from pathlib import Path
 
+import self
+
 
 def load_transactions(zip_file='../src/operations.zip'):
     """Распаковывает zip в текущую папку. Открывает JSON файл, читает в кодировке utf-8, возвращает dict"""
@@ -38,12 +40,12 @@ def last_five_transactions(transactions=None):
 def un_visible_number(un_number):
     """Маскирует номера карт и счетов. На входе поля from и to, на выходе получатель и скрытый номер"""
     if un_number[0:4] == "Счет":
-        return un_number[0:4] + " **" + un_number[len(un_number) - 4:len(un_number)]
+        return f"{un_number[0:4]} **{un_number[len(un_number) - 4:len(un_number)]}"
     else:
-        return un_number[0:len(un_number)-12] + " " + un_number[len(un_number)-12:len(un_number)-10] + "** **** " + un_number[len(un_number)-4:len(un_number)]
+        return f"{un_number[0:len(un_number)-12]} {un_number[len(un_number)-12:len(un_number)-10]} ** **** {un_number[len(un_number)-4:len(un_number)]}"
 
 
 def formate_date(non_formate_date):
     """Форматирует дату. На входе поле date в ISO формате. Отдаёт чило.месяц.год"""
-    form_date = datetime.strptime(non_formate_date[0:len(non_formate_date)-7], "%Y-%m-%dT%H:%M:%S")
+    form_date = datetime.strptime(non_formate_date, "%Y-%m-%dT%H:%M:%S.%f")
     return form_date.strftime("%d.%m.%Y")
